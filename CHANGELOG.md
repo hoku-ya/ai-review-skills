@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 - 2026-09-09
+
+Build: `0.3.0+codex.20260909125944`
+
+- Add the portable Agent Plugins 1.0 root manifest while retaining the Codex compatibility manifest and all seven existing Skills.
+- Add public-submission privacy, terms, support, logo, checklist, release notes, and six positive/four negative reviewer test cases.
+- Add a deterministic submission ZIP builder that verifies both manifests and all Skill entrypoints.
+- Keep public submission, approval, publication, and Chat/Work Cloud E2E as separate completion gates.
+
 ## 0.2.1 - 2026-09-09
 
 Build: `0.2.1+codex.20260909122358`

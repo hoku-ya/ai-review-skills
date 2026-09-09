@@ -1,6 +1,6 @@
 {
   "name": "ai-review-skills",
-  "version": "0.2.1+codex.20260909122358",
+  "version": "0.3.0+codex.20260909125944",
   "description": "Evidence-preserving research, paper explanation, quotation, and HTML review skills for ChatGPT and Codex.",
   "author": {
     "name": "hoku-ya",

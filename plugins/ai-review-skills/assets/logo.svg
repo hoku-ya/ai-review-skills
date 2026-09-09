@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">AI Review Skills</title>
+  <desc id="desc">A document, magnifying glass, and evidence check mark.</desc>
+  <rect width="512" height="512" rx="96" fill="#172554"/>
+  <path d="M126 92h190l70 70v164H126z" fill="#f8fafc"/>
+  <path d="M316 92v70h70" fill="#bfdbfe"/>
+  <path d="M172 202h150M172 246h116" stroke="#2563eb" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="294" cy="320" r="72" fill="#dbeafe" stroke="#38bdf8" stroke-width="20"/>
+  <path d="m346 372 54 54" stroke="#38bdf8" stroke-width="24" stroke-linecap="round"/>
+  <path d="m256 320 25 25 49-58" fill="none" stroke="#15803d" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

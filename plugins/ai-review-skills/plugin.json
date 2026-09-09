@@ -1,0 +1,31 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ai-review-skills",
+  "version": "0.3.0+codex.20260909125944",
+  "description": "Evidence-preserving research, paper explanation, quotation, and HTML review workflows for ChatGPT and Codex.",
+  "author": {
+    "name": "hoku-ya",
+    "url": "https://github.com/hoku-ya"
+  },
+  "homepage": "https://github.com/hoku-ya/ai-review-skills",
+  "repository": "https://github.com/hoku-ya/ai-review-skills",
+  "license": "MIT",
+  "keywords": ["research", "citations", "paper", "review", "html"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "AI Review Skills",
+        "shortDescription": "Research and review with citations and preserved evidence.",
+        "longDescription": "Seven reusable workflows for sourced Markdown, surveys, faithful paper explainers, visual HTML explanations, and human review snapshots across ChatGPT and Codex.",
+        "developerName": "hoku-ya",
+        "category": "Productivity",
+        "websiteURL": "https://github.com/hoku-ya/ai-review-skills",
+        "defaultPrompt": [
+          "Create a sourced survey and preserve every citation.",
+          "Explain this paper and continue if figure extraction fails.",
+          "Render this Review Packet with @ai-review-skills:html-review."
+        ]
+      }
+    }
+  }
+}
