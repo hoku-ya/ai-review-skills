@@ -6,11 +6,18 @@ def ck(v,m):
 def tx(p): return p.read_text(encoding='utf-8')
 manifest=json.loads(tx(P/'.codex-plugin/plugin.json')); portable=json.loads(tx(P/'plugin.json')); market=json.loads(tx(R/'.agents/plugins/marketplace.json'))
 source=market['plugins'][0]['source']
-ck(manifest['name']=='ai-review-skills' and manifest['skills']=='./skills/' and manifest['version'].startswith('0.3.1'),'manifest')
+ck(manifest['name']=='ai-review-skills' and manifest['skills']=='./skills/' and manifest['version'].startswith('0.3.2'),'manifest')
 ck(portable['$schema']=='https://agent-plugins.org/schemas/1.0.0/plugin.schema.json' and portable['name']==manifest['name'] and portable['version']==manifest['version'],'portable manifest')
 interface=portable['extensions']['com.openai']['interface']
-ck(interface.get('logo')=='./assets/logo.svg' and interface.get('composerIcon')=='./assets/icon.svg','visual metadata')
+ck(interface.get('logo')=='./assets/directory-light.png' and interface.get('composerIcon')=='./assets/composer-light.png','visual metadata')
 ck((P/interface['logo'][2:]).is_file() and (P/interface['composerIcon'][2:]).is_file(),'visual assets')
+try:
+ from PIL import Image
+ expected_images={'directory-light.png':(512,512),'directory-dark.png':(512,512),'composer-light.png':(256,256),'composer-dark.png':(256,256)}
+ for name,size in expected_images.items():
+  with Image.open(P/'assets'/name) as visual:
+   ck(visual.format=='PNG' and visual.size==size and visual.mode in ('RGBA','RGB'),'visual PNG '+name)
+except Exception as e: errors.append('visual PNG '+str(e))
 ck(source=={'source':'local','path':'./plugins/ai-review-skills'},'same-repository marketplace source')
 expected={'writing-quotation','documenting-with-sources','survey','paper-details','explain','html','html-review'}; ck({p.parent.name for p in S.glob('*/SKILL.md')}==expected,'skills')
 paper=tx(S/'paper-details/SKILL.md'); survey=tx(S/'survey/SKILL.md'); ck('図表画像は未抽出' in paper and 'solely for figure extraction' in paper,'figure fallback'); ck('parallel-subagents' in paper+survey and 'sequential-single-agent' in paper+survey,'audit fallback')
@@ -30,7 +37,7 @@ with tempfile.TemporaryDirectory() as d:
  with zipfile.ZipFile(archive,'w') as z:
   for p in files: z.write(p,p.relative_to(P).as_posix())
  with zipfile.ZipFile(archive) as z: names=set(z.namelist())
- for required in ('plugin.json','.codex-plugin/plugin.json','LICENSE','THIRD_PARTY_LICENSES.md','assets/icon.svg','assets/logo.svg','skills/paper-details/SKILL.md','skills/paper-details/scripts/extract_images.py','skills/paper-details/scripts/package_report.py','skills/html/design-system/document.css','skills/html-review/references/review-packet.schema.json','skills/html-review/assets/template.html'):
+ for required in ('plugin.json','.codex-plugin/plugin.json','LICENSE','THIRD_PARTY_LICENSES.md','assets/icon.svg','assets/logo.svg','assets/composer-light.png','assets/composer-dark.png','assets/directory-light.png','assets/directory-dark.png','skills/paper-details/SKILL.md','skills/paper-details/scripts/extract_images.py','skills/paper-details/scripts/package_report.py','skills/html/design-system/document.css','skills/html-review/references/review-packet.schema.json','skills/html-review/assets/template.html'):
   ck(required in names,'archive missing '+required)
 for p in [x for x in P.rglob('*') if x.is_file()]:
  try: content=p.read_text(encoding='utf-8')
@@ -68,7 +75,7 @@ with tempfile.TemporaryDirectory() as d:
  if bundle.is_file():
   with zipfile.ZipFile(bundle) as archive:
    bundled=set(archive.namelist())
-  ck('plugin.json' in bundled and 'LICENSE' in bundled and 'THIRD_PARTY_LICENSES.md' in bundled and 'assets/logo.svg' in bundled and 'assets/icon.svg' in bundled and all(f'skills/{name}/SKILL.md' in bundled for name in expected),'submission bundle contents')
+  ck('plugin.json' in bundled and 'LICENSE' in bundled and 'THIRD_PARTY_LICENSES.md' in bundled and all(f'assets/{name}' in bundled for name in expected_images) and all(f'skills/{name}/SKILL.md' in bundled for name in expected),'submission bundle contents')
 if errors:
  print('FAIL'); print('\n'.join('- '+e for e in errors)); raise SystemExit(1)
 print('PASS: structure, dependencies, explicit invocation, PDF fallback, audit routing, Markdown, single HTML, Evidence')

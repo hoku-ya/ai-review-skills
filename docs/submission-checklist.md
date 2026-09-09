@@ -24,7 +24,7 @@ Official references:
 - [x] Name: `AI Review Skills`.
 - [x] Category: `Productivity`.
 - [x] Short and long descriptions prepared in both manifests.
-- [x] Production logo and simplified composer icon are bundled and declared through `extensions.com.openai.interface.logo` and `composerIcon`.
+- [x] Directory Light/Dark PNGs are bundled at 512x512; Composer Light/Dark PNGs are bundled at 256x256. The portable manifest references the Light PNGs, and the corresponding Dark PNGs are ready for the separate submission-form fields.
 - [x] Website, repository, support, privacy, and terms destinations defined.
 - [x] Repository, README, LICENSE, privacy, terms, and support content are anonymously reachable; verified through public GitHub/raw URLs on 2026-09-09.
 - [ ] Publisher name and public URLs confirmed to match the verified developer identity selected in OpenAI Platform.

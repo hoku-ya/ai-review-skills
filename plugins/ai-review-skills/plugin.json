@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ai-review-skills",
-  "version": "0.3.1+codex.20260909134200",
+  "version": "0.3.2+codex.20260909134907",
   "description": "Evidence-preserving research, paper explanation, quotation, and HTML review workflows for ChatGPT and Codex.",
   "author": {
     "name": "hoku-ya",
@@ -23,8 +23,8 @@
         "privacyPolicyURL": "https://github.com/hoku-ya/ai-review-skills/blob/main/PRIVACY.md",
         "termsOfServiceURL": "https://github.com/hoku-ya/ai-review-skills/blob/main/TERMS.md",
         "brandColor": "#172554",
-        "composerIcon": "./assets/icon.svg",
-        "logo": "./assets/logo.svg",
+        "composerIcon": "./assets/composer-light.png",
+        "logo": "./assets/directory-light.png",
         "defaultPrompt": [
           "Create a sourced survey and preserve every citation.",
           "Explain this paper and continue if figure extraction fails.",

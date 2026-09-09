@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.2 - 2026-09-09
+
+Build: `0.3.2+codex.20260909134907`
+
+- Add square PNG assets for the submission form: 512x512 Directory Light/Dark and 256x256 Composer Light/Dark.
+- Point portable `logo` and `composerIcon` metadata to PNG assets while retaining SVG sources.
+- Validate PNG type, dimensions, manifest references, and ZIP inclusion.
+
 ## 0.3.1 - 2026-09-09
 
 Build: `0.3.1+codex.20260909134200`

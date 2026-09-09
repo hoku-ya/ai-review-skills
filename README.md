@@ -44,3 +44,5 @@ python scripts/build_submission_bundle.py <output.zip>
 ```
 
 Submission materials are in `docs/submission-checklist.md` and `docs/submission-test-cases.md`. Privacy, terms, and support disclosures are in `PRIVACY.md`, `TERMS.md`, and `SUPPORT.md`. Preparation does not mean the Plugin has been submitted, approved, or published. Chat/Work Cloud support remains unconfirmed until the published package reports `SKILL.md loaded: true` and its bundled resources pass E2E testing.
+
+Public listing images are under `plugins/ai-review-skills/assets/`: `directory-light.png` and `directory-dark.png` are 512x512 Directory images; `composer-light.png` and `composer-dark.png` are 256x256 Composer images. The SVG sources remain alongside them.
