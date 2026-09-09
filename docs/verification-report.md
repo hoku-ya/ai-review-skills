@@ -1,12 +1,21 @@
 # Verification report
 
-Date: 2026-09-09 JST. Codex Local and Work Local paper-details execution were confirmed by the user; Work Local completed PDF analysis, figure extraction, Markdown, and section audit. Normal Chat and Work Cloud showed the Plugin/Skills but failed to retrieve SKILL.md. The post-fix Chat/Work Cloud E2E remains `未確認`. Official basis: [Plugins](https://learn.chatgpt.com/docs/plugins), [Build skills](https://learn.chatgpt.com/docs/build-skills), and [Plugin management](https://learn.chatgpt.com/docs/enterprise/plugin-management).
+Date: 2026-09-09 JST. Codex Local and Work Local paper-details execution were confirmed by the user; Work Local completed PDF analysis, figure extraction, Markdown, and section audit. Normal Chat and Work Cloud showed the Plugin/Skills but failed to retrieve SKILL.md. After the v0.2.0 `git-subdir` change and reinstall, normal Chat again listed `ai-review-skills:paper-details` but reported `SKILL.md loaded: false` and attempted a Windows personal-cache path. It saw the PDF but correctly stopped before analysis. Chat/Work Cloud compatibility is therefore **not fixed**. Official basis: [Skills and plugins](https://learn.chatgpt.com/docs/skills-and-plugins), [Skill controls](https://learn.chatgpt.com/docs/enterprise/skills), [Plugin management](https://learn.chatgpt.com/docs/enterprise/plugin-management), and [Submit plugins](https://developers.openai.com/plugins/deploy/submission).
 
-Candidate build: `0.2.0+codex.20260909031818`.
+Candidate build: `0.2.1+codex.20260909122358`.
 
 ## Root cause and fix
 
-The installed local cache contained every SKILL.md, reference, script, and asset, so the bundle itself was not missing. The personal marketplace entry used `source: local`; normal Chat then tried to load a Windows cache path that a non-local runtime cannot access. This is a distribution-path mismatch. `source: local` remains valid for a marketplace imported from the same GitHub repository and was not considered generally invalid. For this personal cross-surface route, the entry now uses the officially supported `git-subdir` form with repository URL, subdirectory, and `main` ref. This gives the installer a remote hydration source. Chat/Work Cloud success must still be confirmed after reinstall in a new task.
+The installed local cache contained every SKILL.md, reference, script, and asset, so the bundle itself was not missing. The failure is at the distribution boundary: a personal installation exposed Skill metadata to normal Chat, while its executable content still resolved to a device-local cache path unavailable to the remote runtime. `git-subdir` is a valid marketplace source, but the v0.2.0 E2E proves it does not turn this personal installation into a cloud-hydrated package. The repository now returns to the officially documented `source: local` form for a Plugin in the same marketplace repository. No further manifest-source changes are justified without new product evidence.
+
+Distribution routes are separate:
+
+| Route | Intended boundary | Current conclusion |
+|---|---|---|
+| Personal marketplace install | Local Codex development/install | Codex Local verified; normal Chat/Work Cloud hydration cannot be guaranteed |
+| Workspace GitHub marketplace import | Admin-managed Chat/Work workspace distribution and sync | Officially supported; requires admin import/GitHub authorization; E2E not yet performed |
+| Public/universal Plugin | Public directory shared by ChatGPT and Codex | Official submission/review path; not submitted |
+| ChatGPT workspace Skill | Workspace-owned focused workflow | Separate ownership/lifecycle; possible alternative, but not equivalent to installing this Plugin |
 
 Work Local was mislabeled because capability detection treated filesystem/Python as proof of Codex Local. Metadata now requires separate `product` and `execution_location` values from host/task context, falling back to `Unknown` rather than guessing.
 
@@ -14,30 +23,40 @@ The broken copied report resulted from copying Markdown without its `images-from
 
 ## Tests
 
-Plugin validator, all seven Skill validators, Python compilation, and `tests/run_tests.py` passed locally for the candidate build. The suite checks structure/dependencies, explicit-only metadata, PDF fallback, audit routing, canonical inputs, offline HTML, Evidence, a zip/archive-equivalent inventory, absence of local absolute paths, the remote-hydratable marketplace source, and portable Markdown image links. The existing `new-chat-2/outputs/2510.04618v3.md` was checked separately: seven image links, zero missing files. Post-fix Chat/Work Cloud invocation remains unconfirmed.
+Plugin validator, all seven Skill validators, Python compilation, and `tests/run_tests.py` passed locally for this candidate build. The suite checks structure/dependencies, explicit-only metadata, PDF fallback, audit routing, canonical inputs, offline HTML, Evidence, a zip/archive-equivalent inventory, absence of local absolute paths, the same-repository marketplace source, and portable Markdown image links. The existing `new-chat-2/outputs/2510.04618v3.md` was checked separately: seven image links, zero missing files.
 
-Audit execution: three read-only subagents were launched in parallel for upstream/license/dependencies, Plugin/Work compatibility, and html-review design. Findings returned, but final turns hit the usage limit. The main agent completed the same checklist sequentially. Effective completion mode: `sequential-single-agent` after a documented parallel attempt.
+Cross-surface gates are independent:
+
+| Gate | Normal Chat personal v0.2.0 | Work Cloud personal | Codex Local | Work Local |
+|---|---|---|---|---|
+| 1. Skill listed | PASS | PASS (earlier user test) | PASS | PASS |
+| 2. `SKILL.md` loaded | **FAIL** | **FAIL** (earlier user test) | PASS | PASS |
+| 3. scripts/references/assets usable | BLOCKED (gate 2) | BLOCKED (gate 2) | PASS | PASS for exercised paper path |
+
+Audit execution: three read-only subagents were launched in parallel for upstream/license/dependencies, Plugin/Work compatibility, and html-review design. Findings returned, but their final turns hit the usage limit. On the resumed compatibility audit, all three existing subagents were still stopped by the usage limit, so the main agent completed the same checklist sequentially. Effective completion mode: `sequential-single-agent` after documented parallel attempts.
 
 ## Capability comparison
 
 | Capability | Codex Local | Work Local | Work Cloud |
 |---|---|---|---|
-| Plugin instructions | 同等 | 同等（実機確認） | 未確認（修正後E2E待ち） |
+| Plugin instructions | 同等 | 同等（実機確認） | 利用不可（personal経路の実機結果。workspace/public経路は未確認） |
 | Provided/uploaded files | 同等 | 同等 | 同等 |
 | Direct device files | 同等 | 条件付きで同等 | 代替手段あり |
 | Local apps/browser sessions | 同等 | 条件付きで同等 | 利用不可 |
 | Code/Shell/Python | 同等 | 未確認 | 未確認 |
 | uv | 利用不可（今回のhost） | 未確認 | 未確認 |
-| PDF body analysis | 同等 | 同等（実機確認） | 未確認 |
+| PDF body analysis | 同等 | 同等（実機確認） | 代替手段あり（Plugin Skill未読でも一般PDF機能は別。Skill準拠E2Eは未確認） |
 | Figure extraction | 条件付きで同等 | 同等（実機確認） | 未確認 |
-| Figure-failure continuation | 同等 | 同等（指示経路） | 同等（指示経路） |
+| Figure-failure continuation | 同等 | 同等（指示経路） | 未確認（SKILL.md未読） |
 | Parallel subagents | 同等（利用可） | 未確認 | 未確認 |
 | Sequential audit | 同等 | 同等 | 同等 |
 | Portable Markdown + images | 同等 | 同等（package path） | 代替手段あり |
 | Shared CSS/images | 同等 | 条件付きで同等 | 代替手段あり |
 | Offline single HTML | 同等 | 同等 | 同等 |
-| Live explicit invocation | 未確認 | 未確認 | 未確認 |
+| Live explicit invocation | 同等 | 同等（paper-details実機確認） | 利用不可（personal経路、Skill選択のみ成功） |
 
 ## Work migration differences
 
-No Codex feature was removed from the Plugin. Work Cloud cannot directly inherit device files/apps/browser sessions; use uploads, Project/Library, or an authorized app, and retain Codex for local/private workflows. Python/uv/PyMuPDF and subagents vary by exposed tools/policy; use body-only analysis with the extraction notice and the identical sequential audit checklist. Cloud cannot rely on shared local assets or fixed local paths; inline assets in one HTML and return a generated file. These differences are why the Codex Local paths remain necessary.
+No Codex feature was removed from the Plugin. Work Cloud cannot directly inherit device files/apps/browser sessions; use uploads, Project/Library, or an authorized app, and retain Codex for local/private workflows. Python/uv/PyMuPDF and subagents vary by exposed tools/policy; once the Skill is actually loaded, use body-only analysis with the extraction notice and the identical sequential audit checklist. Cloud cannot rely on shared local assets or fixed local paths; inline assets in one HTML and return a generated file.
+
+The additional loss observed when moving from the personal Codex installation to normal Chat/Work Cloud is the entire bundled instruction/resource layer: the UI can list the Skill, but the remote runtime cannot load its device-cache `SKILL.md`, so dependencies, evidence rules, figure-failure continuation, and bundled scripts/assets cannot be guaranteed. The cause is the personal-to-cloud distribution boundary, not missing repository files. The workaround is an admin-managed Workspace GitHub import, public Plugin publication, or separate ChatGPT workspace Skill distribution. Codex Local must remain supported because it is the verified path for local files, shared assets, Python helpers, figure extraction, and local output packaging.

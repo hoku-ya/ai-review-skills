@@ -6,8 +6,8 @@ def ck(v,m):
 def tx(p): return p.read_text(encoding='utf-8')
 manifest=json.loads(tx(P/'.codex-plugin/plugin.json')); market=json.loads(tx(R/'.agents/plugins/marketplace.json'))
 source=market['plugins'][0]['source']
-ck(manifest['name']=='ai-review-skills' and manifest['skills']=='./skills/' and manifest['version'].startswith('0.2.0'),'manifest')
-ck(source=={'source':'git-subdir','url':'https://github.com/hoku-ya/ai-review-skills.git','path':'./plugins/ai-review-skills','ref':'main'},'remote-hydratable marketplace source')
+ck(manifest['name']=='ai-review-skills' and manifest['skills']=='./skills/' and manifest['version'].startswith('0.2.1'),'manifest')
+ck(source=={'source':'local','path':'./plugins/ai-review-skills'},'same-repository marketplace source')
 expected={'writing-quotation','documenting-with-sources','survey','paper-details','explain','html','html-review'}; ck({p.parent.name for p in S.glob('*/SKILL.md')}==expected,'skills')
 paper=tx(S/'paper-details/SKILL.md'); survey=tx(S/'survey/SKILL.md'); ck('図表画像は未抽出' in paper and 'solely for figure extraction' in paper,'figure fallback'); ck('parallel-subagents' in paper+survey and 'sequential-single-agent' in paper+survey,'audit fallback')
 for skill in ('html','html-review'):

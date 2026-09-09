@@ -21,9 +21,11 @@ codex plugin marketplace add <repository-root>
 codex plugin add ai-review-skills@personal
 ```
 
-The marketplace entry uses the official `git-subdir` source so Chat and Work Cloud can hydrate the bundled Skill from GitHub instead of receiving a device-local cache path. For a managed workspace, an administrator can instead import `https://github.com/hoku-ya/ai-review-skills` under Admin > Plugins and sync it from GitHub; the repository-root marketplace layout is also valid for that route.
+The personal marketplace install is verified for Codex Local, but it does **not** guarantee Skill hydration in normal Chat or Work Cloud. In the v0.2.0 E2E test, Chat listed `ai-review-skills:paper-details` but could not load its `SKILL.md`; changing the entry from `local` to `git-subdir` did not fix that distribution boundary. The marketplace therefore uses the official same-repository `local` form again.
 
-After updating, sync/reinstall the marketplace Plugin and start a new task. If a target surface reports that it cannot retrieve the selected Skill, stop; do not substitute a generic answer. A minimal E2E prompt is:
+For managed Chat/Work distribution, a workspace administrator should import `https://github.com/hoku-ya/ai-review-skills` under **Admin > Plugins > Add > Import marketplace**, leave **Path** empty, select `main` (or leave the default branch), authorize GitHub, and review the import result. A public/universal Plugin is a separate reviewed publication path. A ChatGPT workspace Skill is also a separate lifecycle and does not inherit Plugin installation or ownership.
+
+After any workspace import or update, select **Sync now**, start a new task, and test all three gates: (1) Skill listed, (2) `SKILL.md` loaded, and (3) referenced scripts/resources/assets usable. If a target surface cannot retrieve the selected Skill, stop; do not substitute a generic answer. A minimal E2E prompt is:
 
 ```text
 Use @ai-review-skills:paper-details. First state the selected Skill name and whether its SKILL.md was loaded. If it was not loaded, stop without analyzing the PDF. If loaded, analyze the attached PDF and report product and execution_location separately.
