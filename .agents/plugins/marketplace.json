@@ -7,8 +7,10 @@
     {
       "name": "ai-review-skills",
       "source": {
-        "source": "local",
-        "path": "./plugins/ai-review-skills"
+        "source": "git-subdir",
+        "url": "https://github.com/hoku-ya/ai-review-skills.git",
+        "path": "./plugins/ai-review-skills",
+        "ref": "main"
       },
       "policy": {
         "installation": "AVAILABLE",

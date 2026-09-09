@@ -7,6 +7,8 @@ description: Produce a detailed Markdown explainer of an academic paper. The ski
 
 Conventions for producing a detailed Markdown explainer of an academic paper. The aim is faithful description, not critique. First read `../../references/runtime-capabilities.md` and detect PDF, filesystem, Python, uv, image-output, and subagent capabilities.
 
+Before analysis, obtain `product` and `execution_location` from explicit task or host metadata and record them separately. Filesystem, Python, or shell availability does not prove Codex Local because Work Local can expose the same tools. If metadata is absent, record `Unknown`.
+
 This skill follows the shared sourced-writing conventions defined in `documenting-with-sources`. Read `documenting-with-sources` before drafting.
 
 ## 1. Deliverable structure
@@ -59,6 +61,10 @@ uv run {this-skill-dir}/scripts/extract_images.py <PDF path> --out {project-root
 - Verify the manifest against PDF captions; an empty manifest is not proof of no figures.
 - If extraction is unavailable, errors, or misses required items, continue complete body-text analysis. Add `図表画像は未抽出` to metadata and relevant sections, record the reason/command, and never fail the entire explainer solely for figure extraction.
 - Do not reconstruct missing visuals. Mark visual-only details unverified. An unreadable PDF body is a separate blocker requiring an accessible source.
+
+### 1.4.1 Portable report copies
+
+Never copy a Markdown report alone when it contains local image links. For export to Downloads, `outputs/`, or another root, create a portable directory containing the Markdown and all referenced local images, with links rewritten inside that directory. When Python is available, run `python {this-skill-dir}/scripts/package_report.py <report.md> <destination-directory>`. Verify every rewritten link. If an image cannot be copied, stop the copy and report it; do not deliver a known-broken Markdown copy. The canonical project report may keep its existing `../images-from-papers/` layout.
 
 ## 2. Quotation and source reference
 
