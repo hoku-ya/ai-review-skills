@@ -1,6 +1,6 @@
 # Support
 
-Use the public GitHub repository for support after it is made public:
+Use the public GitHub repository for support:
 
 - Documentation: https://github.com/hoku-ya/ai-review-skills
 - Issues: https://github.com/hoku-ya/ai-review-skills/issues

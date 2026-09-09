@@ -26,10 +26,10 @@ Official references:
 - [x] Short and long descriptions prepared in both manifests.
 - [x] Production SVG logo prepared at `plugins/ai-review-skills/assets/logo.svg`.
 - [x] Website, repository, support, privacy, and terms destinations defined.
-- [ ] Repository and policy URLs are anonymously reachable. Current anonymous fetch returns 404, so the repository appears private or otherwise unavailable publicly.
+- [x] Repository, README, LICENSE, privacy, terms, and support content are anonymously reachable; verified through public GitHub/raw URLs on 2026-09-09.
 - [ ] Publisher name and public URLs confirmed to match the verified developer identity selected in OpenAI Platform.
 
-Intended URLs after public access is enabled:
+Verified public URLs:
 
 - Website/repository: https://github.com/hoku-ya/ai-review-skills
 - Support: https://github.com/hoku-ya/ai-review-skills/blob/main/SUPPORT.md
