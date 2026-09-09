@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">AI Review Skills</title>
+  <desc id="desc">Evidence check mark in a magnifying glass.</desc>
+  <rect width="128" height="128" rx="28" fill="#172554"/>
+  <circle cx="58" cy="55" r="30" fill="#dbeafe" stroke="#38bdf8" stroke-width="9"/>
+  <path d="m80 78 24 24" stroke="#38bdf8" stroke-width="11" stroke-linecap="round"/>
+  <path d="m43 56 11 11 22-27" fill="none" stroke="#15803d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -11,6 +11,7 @@ REQUIRED = {
     ".codex-plugin/plugin.json",
     "LICENSE",
     "THIRD_PARTY_LICENSES.md",
+    "assets/icon.svg",
     "assets/logo.svg",
     "skills/writing-quotation/SKILL.md",
     "skills/documenting-with-sources/SKILL.md",

@@ -24,7 +24,7 @@ Official references:
 - [x] Name: `AI Review Skills`.
 - [x] Category: `Productivity`.
 - [x] Short and long descriptions prepared in both manifests.
-- [x] Production SVG logo prepared at `plugins/ai-review-skills/assets/logo.svg`.
+- [x] Production logo and simplified composer icon are bundled and declared through `extensions.com.openai.interface.logo` and `composerIcon`.
 - [x] Website, repository, support, privacy, and terms destinations defined.
 - [x] Repository, README, LICENSE, privacy, terms, and support content are anonymously reachable; verified through public GitHub/raw URLs on 2026-09-09.
 - [ ] Publisher name and public URLs confirmed to match the verified developer identity selected in OpenAI Platform.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.1 - 2026-09-09
+
+Build: `0.3.1+codex.20260909134200`
+
+- Declare `logo`, `composerIcon`, brand color, privacy URL, and terms URL in the portable OpenAI interface metadata.
+- Add a simplified composer icon and verify both visual assets in the submission bundle.
+
 ## 0.3.0 - 2026-09-09
 
 Build: `0.3.0+codex.20260909125944`
