@@ -1,0 +1,3 @@
+# Upstream
+
+Six skills were derived from [`mathbullet/skills`](https://github.com/mathbullet/skills) at commit `60cdc312ae888cdd0a2d2d99309ccd918af6b493` (2026-09-08T19:09:50+09:00), verified against live `main` on 2026-09-09. Imported: writing-quotation, documenting-with-sources, survey, paper-details, explain, html. Excluded: ja-text-communication and grilling-viz. The source is MIT licensed; its full notice is retained in `THIRD_PARTY_LICENSES.md`. Downstream changes add OpenAI Plugin packaging, Work routing, audit fallback, non-fatal figure extraction, explicit HTML invocation, and html-review.

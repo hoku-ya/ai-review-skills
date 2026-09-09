@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+reports/
+images-from-papers/
+subagent-reviews/

@@ -1,0 +1,6 @@
+interface:
+  display_name: "HTML"
+  short_description: "Create an explicitly requested visual HTML explainer"
+  default_prompt: "Use $html to create an explicitly requested visual HTML explainer."
+policy:
+  allow_implicit_invocation: false

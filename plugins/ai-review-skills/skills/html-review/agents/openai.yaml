@@ -1,0 +1,6 @@
+interface:
+  display_name: "HTML Review"
+  short_description: "Render a canonical Review Packet as human-review HTML"
+  default_prompt: "Use $html-review to render this Review Packet without changing canonical inputs."
+policy:
+  allow_implicit_invocation: false
